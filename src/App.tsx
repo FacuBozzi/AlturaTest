@@ -4,7 +4,6 @@ import { Badge, Box, Button, Container, Flex, Grid, GridItem, Image, Modal, Moda
 import { NFT } from './types/types';
 import { formatAddress, getFileFormat, trimText } from './utils/formatFunctions';
 import ReactPlayer from 'react-player'
-import Navbar from './components/Navbar/Navbar';
 import EthereumForm from './components/EthereumInput/EthereumInput';
 
 function App() {
@@ -44,7 +43,7 @@ function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedNft, setSelectedNft] = useState<NFT>();
 
-  function handleNftClick(nft: any) {
+  function handleNftClick(nft: NFT) {
     setSelectedNft(nft);
     onOpen();
   }

@@ -1,15 +1,26 @@
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react'
+import { Button, ListItem, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, UnorderedList } from '@chakra-ui/react'
 import React from 'react'
 import { ReadMeModalTypes } from '../../types/types'
 
-const ReadMeModal = ({openRead, setOpenRead}: ReadMeModalTypes) => {
+const ReadMeModal = ({ openRead, setOpenRead }: ReadMeModalTypes) => {
     return (
         <Modal isOpen={openRead} onClose={() => setOpenRead(false)}>
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>Important</ModalHeader>
                 <ModalBody>
-                    Test
+                    <UnorderedList mb={5}>
+                        <ListItem>
+                            Made this Dapp to work on the ethereum mainnet chain using the free OpenSea API. This was the fastest and simplest way to get the Dapp to do this job. For this reason it's probably also more limited.
+                        </ListItem>
+                        <ListItem>
+                            It can display both videos and images once the NFT is selected and the modal is displayed. You can only see an NFT thumbnail in the grid.
+                        </ListItem>
+                        <ListItem>
+                            I used a minimalist approach due to the time limit and my job, while still keeping a clean, modern and elegant look.
+                        </ListItem>
+                    </UnorderedList>
+                    Hope you enjoy it!
                 </ModalBody>
                 <ModalFooter>
                     <Button variant="ghost" onClick={() => setOpenRead(false)}>
