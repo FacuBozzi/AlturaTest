@@ -10,7 +10,10 @@ function App() {
   const [nfts, setNfts] = useState([]);
   const [ethAddress, setEthAddress] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedNft, setSelectedNft] = useState<NFT>();
 
+  //gets the NFTs from the opensea API
   const getNfts = async () => {
     if (!ethAddress) return;
     setLoading(true)
@@ -40,9 +43,6 @@ function App() {
     getNfts().then(() => console.log("The NFTs", nfts))
   }, [ethAddress])
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedNft, setSelectedNft] = useState<NFT>();
-
   function handleNftClick(nft: NFT) {
     setSelectedNft(nft);
     onOpen();
@@ -50,16 +50,11 @@ function App() {
 
   function handlePurchaseClick() {
     if (!selectedNft) return;
-    console.log("selectedNft", selectedNft);
     window.open(selectedNft.permalink, '_blank');
     onClose();
   }
 
-  console.log("nft", nfts)
-  console.log("etsh", ethAddress)
-  console.log(selectedNft?.image_url)
-  console.log(getFileFormat(selectedNft?.image_original_url!))
-
+  //first page (user inputs an ETH address for retrieving its NFTs)
   if (ethAddress == '') {
     return (
       <>
@@ -67,18 +62,25 @@ function App() {
       </>
     )
   }
+
+  // Spinner component when the Dapp is loading
   if (loading) return (
     <Spinner display='flex' mx='auto' mt={150}/>
   )
+
   return (
     <>
       <Container display='flex' flexDirection='column' alignItems='center' w='100%' maxWidth='990px' p={10}>
+
+        {/* If there are no NFTs in the ETH account, let the user know */}
         {nfts.length === 0 &&
           <>
             <Text mt={10} fontWeight={600} fontSize={'xl'} mb={5}>No NFTs found for this account.</Text>
             <Button onClick={() => setEthAddress('')} width='300px'>Go Back</Button>
           </>
         }
+
+        {/* mapping of every NFT gotten from the ETH account. Displayed as a grid */}
         <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }} gap={6}>
           {nfts.map((nft: NFT, index) => (
             <>
@@ -110,7 +112,11 @@ function App() {
             </>
           ))}
         </Grid>
-        {nfts.length > 0 && <Button mt={35} color='white' bgColor='grey' onClick={() => setEthAddress('')} width='100px'>Go Back</Button>}        
+
+        {/* A 'Go Back' button for going back to input an ETH address */}
+        {nfts.length > 0 && <Button mt={35} color='white' bgColor='grey' onClick={() => setEthAddress('')} width='100px'>Go Back</Button>}  
+
+        {/* Modal with description and NFT details */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
