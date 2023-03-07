@@ -20,7 +20,7 @@ const ReadMeModal = ({ openRead, setOpenRead }: ReadMeModalTypes) => {
                             I used a minimalist approach due to the time limit and my job, while still keeping a clean, modern and elegant look.
                         </ListItem>
                         <ListItem>
-                            Added clear comments to make the code very understandeable.
+                            Added clear comments to make the code very understandable.
                         </ListItem>
                         <ListItem>
                             All the main logic is on 'App.tsx'.
