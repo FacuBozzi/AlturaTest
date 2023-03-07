@@ -23,6 +23,9 @@ const ReadMeModal = ({ openRead, setOpenRead }: ReadMeModalTypes) => {
                             Added clear comments to make the code very understandable.
                         </ListItem>
                         <ListItem>
+                            Check out this account to see video-NFTs: 0x7292a63772E7939eF6cb3B94f997Be860Fb0754e
+                        </ListItem>
+                        <ListItem>
                             All the main logic is on 'App.tsx'.
                         </ListItem>
                     </UnorderedList>
